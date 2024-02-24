@@ -1,0 +1,12 @@
+{
+  "objects": [
+    {
+      "name": "flowers",
+      "path": "images/flowers.png"
+    },
+    {
+      "name": "moon",
+      "path": "images/moon.png"
+    }
+  ]
+}

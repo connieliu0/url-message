@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client-side URL Manipulation with Click and Drag</title>
+    <style>
+      .movableElement {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        cursor: pointer;
+      }
+
+      #element1 {
+        background-color: blue;
+      }
+
+      #element2 {
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Client-side URL Manipulation with Click and Drag</h1>
+    <div id="element1" class="movableElement"></div>
+    <div id="element2" class="movableElement"></div>
+
+    <script>
+      let isDragging = false;
+      let currentElement = null;
+
+      // Function to update URL hash based on the positions of the elements
+      function updateURL() {
+        const element1 = document.getElementById("element1");
+        const element2 = document.getElementById("element2");
+        const x1 = element1.style.left || "0px"; // Default to 0 if left style is not set
+        const x2 = element2.style.left || "0px";
+        window.location.hash = `x1=${parseInt(x1, 10)}&x2=${parseInt(x2, 10)}`;
+      }
+
+      // Function to move the element and update URL hash
+      function moveElement(event) {
+        if (isDragging) {
+          const x = event.clientX;
+          currentElement.style.left = `${x}px`;
+          updateURL();
+        }
+      }
+
+      // Function to handle mouse down event
+      function handleMouseDown(event) {
+        isDragging = true;
+        currentElement = event.target;
+      }
+
+      // Function to handle mouse up event
+      function handleMouseUp() {
+        isDragging = false;
+        currentElement = null;
+      }
+
+      // Event listeners for mouse events
+      document.addEventListener("mousemove", moveElement);
+      document.addEventListener("mousedown", handleMouseDown);
+      document.addEventListener("mouseup", handleMouseUp);
+
+      // Handle initial page load
+      window.addEventListener("load", function () {
+        // Parse the hash and move the elements accordingly
+        const hash = window.location.hash.substr(1);
+        const params = new URLSearchParams(hash);
+        const x1 = params.get("x1");
+        const x2 = params.get("x2");
+        const element1 = document.getElementById("element1");
+        const element2 = document.getElementById("element2");
+        element1.style.left = `${x1}px`;
+        element2.style.left = `${x2}px`;
+      });
+    </script>
+  </body>
+</html>
