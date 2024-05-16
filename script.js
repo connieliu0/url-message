@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const select = document.createElement('select');
                 select.id = key;
                 select.setAttribute('data-image-index', index);
-                select.addEventListener('change', updateHashAndImage);
+                select.addEventListener('change', updatehashimg);
                 data[key].forEach(option => {
                     const optionElement = document.createElement('option');
                     optionElement.value = option.value;
@@ -19,15 +19,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 selectContainer.appendChild(select);
             });
-            initializeFromHash();
+            inithash();
         })
         .catch(error => console.error('Error loading options:', error));
-    function updateHashAndImage() {
+    function updatehashimg() {
         const hash = Array.from(selectContainer.children).map(select => select.value).join('.');
         window.location.hash = hash; 
-        updateSelectedImages();
+        updateselectedimgs();
     }
-    function updateSelectedImages() {
+    function updateselectedimgs() {
         const hash = window.location.hash.substr(1); 
         const values = hash.split('.');
         imageContainers.forEach((container, index) => {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
             container.querySelector('img').src = imageUrl;
         });
     }
-    function initializeFromHash() {
+    function inithash() {
         const hash = window.location.hash.substr(1); 
         if (hash) {
             const values = hash.split('.');
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 values.forEach((value, index) => {
                     selects[index].value = value;
                 });
-                updateSelectedImages();
+                updateselectedimgs();
             }
         }
     }
