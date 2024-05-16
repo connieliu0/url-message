@@ -1,0 +1,53 @@
+{
+    "dropdown1": [
+        {"value": "i", "label": "I"},
+        {"value": "the_moon", "label": "the moon"},
+        {"value": "the_star", "label": "the star"}
+    ],
+    "dropdown2": [
+        {"value": "am", "label": "am"},
+        {"value": "will_be", "label": "will be"},
+        {"value": "was", "label": "was"}
+    ],
+    "dropdown3": [
+        {"value": "thinking", "label": "thinking"},
+        {"value": "remembering", "label": "remembering"},
+        {"value": "missing", "label": "missing"},
+        {"value": "letting_go", "label": "letting go"},
+        {"value": "loving", "label": "loving"},
+        {"value": "holding", "label": "holding"},
+        {"value": "dreaming", "label": "dreaming"}
+    ],
+    "dropdown4": [
+        {"value": "of", "label": "of"},
+        {"value": "with", "label": "with"},
+        {"value": "about", "label": "about"}
+    ],
+    "dropdown5": [
+        {"value": "you", "label": "you"},
+        {"value": "them", "label": "them"},
+        {"value": "it", "label": "it"}
+    ],
+    "dropdown6": [
+        {"value": "today", "label": "today"},
+        {"value": "tomorrow", "label": "tomorrow"},
+        {"value": "yesterday", "label": "yesterday"}
+    ],
+    "dropdown7": [
+        {"value": "with", "label": "with"},
+        {"value": "using", "label": "using"},
+        {"value": "containing", "label": "containing"}
+    ],
+    "dropdown8": [
+        {"value": "much", "label": "much"},
+        {"value": "some", "label": "some"},
+        {"value": "traces_of", "label": "traces of"}
+    ],
+    "dropdown9": [
+        {"value": "well_wishes", "label": "well wishes"},
+        {"value": "love", "label": "love"},
+        {"value": "hope", "label": "hope"},
+        {"value": "forgiveness", "label": "forgiveness"},
+        {"value": "a_forever", "label": "a forever"}
+    ]
+}
