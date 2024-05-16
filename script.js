@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
     const selectContainer = document.getElementById('select-container');
     const imageContainers = document.querySelectorAll('.image-container .selected-image');
-
-    // Load options from JSON
+    let doneUnblur = false;
+    let zoomed=false;
     fetch('options.json')
         .then(response => response.json())
         .then(data => {
-            // Create select elements
             Object.keys(data).forEach((key, index) => {
                 const select = document.createElement('select');
                 select.id = key;
@@ -20,31 +19,24 @@ document.addEventListener("DOMContentLoaded", function() {
                 });
                 selectContainer.appendChild(select);
             });
-            // Initialize based on URL hash
             initializeFromHash();
         })
         .catch(error => console.error('Error loading options:', error));
-
-    // Function to update URL hash and selected image
     function updateHashAndImage() {
         const hash = Array.from(selectContainer.children).map(select => select.value).join('.');
-        window.location.hash = hash; // Update URL hash
+        window.location.hash = hash; 
         updateSelectedImages();
     }
-
-    // Function to update selected images
     function updateSelectedImages() {
-        const hash = window.location.hash.substr(1); // Remove '#' from hash
+        const hash = window.location.hash.substr(1); 
         const values = hash.split('.');
         imageContainers.forEach((container, index) => {
-            const imageUrl = 'images/' + values[index] + '.jpeg'; // Assuming image filenames correspond to select values
+            const imageUrl = 'images/' + values[index] + '.jpeg'; 
             container.querySelector('img').src = imageUrl;
         });
     }
-
-    // Initialize based on URL hash
     function initializeFromHash() {
-        const hash = window.location.hash.substr(1); // Remove '#' from hash
+        const hash = window.location.hash.substr(1); 
         if (hash) {
             const values = hash.split('.');
             const selects = Array.from(selectContainer.children);
@@ -61,19 +53,40 @@ document.addEventListener("DOMContentLoaded", function() {
     Array.from(image).forEach(function(element) {
         element.addEventListener('mouseenter', function() {
             unblurImg(element);
+            if (doneUnblur){
+            zoom(element);
+        }
+        });
+        element.addEventListener('mouseleave', function() {
+            if (zoom){
+            unzoom(element);}
         });
 
     });
+    function zoom(img){
+        let trueimage=img.getElementsByTagName('img')[0];
+        trueimage.style.transform = `scale(1.5)`;
+        trueimage.style.transition = `transform 10s`;
+        zoomed=true;
+    }
+    function unzoom(img){
+        let trueimage=img.getElementsByTagName('img')[0];
+        trueimage.style.transform = `scale(1)`;
+        trueimage.style.transition = `transform 0s`;
+        zoomed=false;
+    }
     function unblurImg(img){
-        let blurAmount = 10; // Initial blur amount
+        let blurAmount = 10; 
         let interval = setInterval(function() {
             if (blurAmount > 0) {
-                blurAmount=blurAmount-0.25; // Decrease blur amount gradually
+                doneUnblur=false;
+                blurAmount=blurAmount-0.25; 
                 img.style.filter = `blur(${blurAmount}px)`;
             } else {
-                clearInterval(interval); // Stop interval when blur is 0
+                clearInterval(interval);
+                doneUnblur=true;
             }
-        }, 50); // Interval for smoother transition, adjust as needed
+        }, 50); 
     }
 
 });
